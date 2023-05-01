@@ -38,12 +38,15 @@
 
 	<div align="center">
 			<table border="1">
+			
 				<tr>
 					<th>앨범 커버</th>
 					<th>가수</th>
 					<th>제목</th>
 					<th>발매일</th>
 				</tr>
+				
+				
 				<tr>
 					<td>
 						<img alt="pic1" src="njhn.jpg" width="100px" height="100px">
@@ -54,6 +57,8 @@
 					</td>
 					<td>2023.04.10</td>
 				</tr>
+				
+				
 				<tr>
 					<td>
 						<img alt="pic1" src="ntgg.jpg" width="100px" height="100px">
@@ -64,6 +69,7 @@
 					</td>
 					<td>2023.04.10</td>
 				</tr>
+				
 			</table>
 	</div>
 </body>
