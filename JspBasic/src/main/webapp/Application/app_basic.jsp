@@ -6,7 +6,7 @@
 
 
 	<%
-		//방문자수 카운트를 application 객체를 사용해보자
+		//방문자수 카운트를 application 객체를 사용해보자  > 수명이 가장 길며 전 JSP파일에서 사용 가능
 		
 		int count = 0;
 		if(application.getAttribute("visit") != null){

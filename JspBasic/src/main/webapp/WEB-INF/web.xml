@@ -16,15 +16,28 @@
 	</error-page>  
   	
   	
-  	
-  	
-  	
   	<error-page>
   		<exception-type>java.lang.NullPointerException</exception-type>
   		<location>/Exception/error_null.jsp</location>
   	</error-page>
-  
-  
+
+
+
+
+
+	<!-- 서블릿 클래스를 등록하자 -->
+	<servlet>
+		<servlet-name>basic</servlet-name>   <!-- 이름은 마음대로 짓기~ -->
+		<servlet-class>kr.co.jsp.servlet.ServletBasic</servlet-class> <!-- 경로적어주자~ (경로등록) -->
+	</servlet>
+	
+	<!-- 서블릿 등록 -->	
+	<servlet-mapping>
+		<servlet-name>basic</servlet-name>
+		<url-pattern>/basic</url-pattern>
+	</servlet-mapping> <!-- servlet파일의 test_form.jsp로가자 -->
+
+
   
   
 </web-app>
