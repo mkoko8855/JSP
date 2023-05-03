@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 3 -->
+<!-- 3  다중분기조건문에 대해 알아보자 -->
 
 	<!-- age_form태그에서 넘어온 값들을 출력해주자 -->
 	<c:set var="youngage" value="${param.youngage}"/> <!-- value는 youngage에 입력한 값이 들어간다! -->

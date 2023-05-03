@@ -30,7 +30,6 @@
 		<servlet-name>basic</servlet-name>   <!-- 이름은 마음대로 짓기~ -->
 		<servlet-class>kr.co.jsp.servlet.ServletBasic</servlet-class> <!-- 경로적어주자~ (경로등록) -->
 	</servlet>
-	
 	<!-- 서블릿 등록 -->	
 	<servlet-mapping>
 		<servlet-name>basic</servlet-name>

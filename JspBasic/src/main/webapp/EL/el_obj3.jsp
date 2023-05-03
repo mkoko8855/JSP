@@ -30,7 +30,7 @@
 	
 	<p>	<!-- 그러나 el을 이용하면 이렇게 한다. -->
 		# 이름: ${sessionScope.member.userName} <br>  <!-- 일단 FM으로 쓴다면 -->
-		# 아이디:${member.userId} <br>
+		# 아이디:${member.userId} <br> 
 		# 이메일:${member.userEmail} <br>
 		# 비밀번호:${member.userPw} 
 	</p>

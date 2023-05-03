@@ -26,4 +26,37 @@
     <!--
     <Manager pathname="" />
     -->
+    
+    
+    <!-- 커넥션 풀 시작 -->
+    <Resource
+    	auth="Container"
+    	name="jdbc/myOracle"
+    	username="jsp"
+    	password="jsp"
+    	driverClassName="oracle.jdbc.driver.OracleDriver" 
+    	url="jdbc:oracle:thin:@localhost:1521:xe" 
+    	type="javax.sql.DataSource"
+    	maxIdle="30"
+    	maxTotal="100"
+		maxWaitMillis="10000"
+	/>    
+    
+ <!--   
+ 		auth="Container"
+    	name="jdbc/myOracle"
+    	username="jsp" db계정명 
+    	password="jsp"
+    	driverClassName="oracle.jdbc.driver.OracleDriver" 커넥션객체를 생성하려면 이게 등록이 돼야 하니까 이것을 알려주자
+    	url="jdbc:oracle:thin:@Localhost:1521:xe" db위치알려주기
+    	type="javax.sql.DataSource"
+    	maxIdel="30"
+    	maxTotal="10000"  커넥션객체를 최대 몇개인가 
+-->
+    
+    
+    
+    
+    
+    
 </Context>

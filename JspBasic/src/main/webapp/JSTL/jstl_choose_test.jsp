@@ -23,10 +23,9 @@
 	점수 : ${score}
 
 	<c:choose>
-		<%--A --%>
+		<%-- A --%>
 		<c:when test="${score >=90 }">
 			<c:choose>
-			
 				<c:when test="${score >=95 }">
 					<h3>A+.</h3>
 				</c:when>
@@ -35,19 +34,19 @@
 				</c:otherwise>
 			</c:choose>
 		</c:when>
-		<%--B --%>
+		<%-- B --%>
 		<c:when test="${score >=80 }">
 			<h3>B.</h3>
 		</c:when>
-		<%--C --%>
+		<%-- C --%>
 		<c:when test="${score >=70 }">
 			<h3>C.</h3>
 		</c:when>
-		<%--D --%>
+		<%-- D --%>
 		<c:when test="${score >=60 }">
 			<h3>D.</h3>
 		</c:when>
-		<%--F --%>
+		<%-- F --%>
 		<c:otherwise>
 			<h3>F.</h3>
 		</c:otherwise>
