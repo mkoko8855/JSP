@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myweb.user.service.ChangePwService;
 import com.myweb.user.service.IUserService;
 import com.myweb.user.service.JoinService;
+import com.myweb.user.service.LoginService;
 
 
 @WebServlet("*.user") //이건 맵핑한건데, 바꿀 수도 있다~ 바꾸는게 자유로움
@@ -31,6 +33,14 @@ public class UserController extends HttpServlet {
     
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		//서비스 메서드가 시작되자마자 해야하는 일을 간단한 로직을 추가해주자
+		if(request.getMethod().equals("POST")) { //리퀘야 혹시 POST와 방식이 같니? 겟메서드가 스트링이니 문자열비교를위해 equals로 썼다.
+			request.setCharacterEncoding("utf-8"); //같으면 utf-8로 바꿔줘
+		}
+		
+		
+		
+		
 		//제일 먼저 정제하는 과정부터 처리하자
 		String uri = request.getRequestURI();
 		uri = uri.substring(request.getContextPath().length() + 1, uri.lastIndexOf(".")); //변수선언안하고 쭉 썼음 리퀘스트객체한테 받아낸거에 길이를 구하고 그 길이의 1보다 큰 부분에서 시작하고, 뒤에서 부터 탐색을 했을 떄 .이 있으면 . 미만까지 자르겠다~
@@ -67,7 +77,33 @@ public class UserController extends HttpServlet {
 		case "loginPage":
 			System.out.println("로그인 페이지로 이동 요청!");
 			response.sendRedirect("user/user_login.jsp");
+			break;
 			
+			
+			
+		case "login":
+			System.out.println("로그인 요청이 들어옴!");
+			sv = new LoginService(); //로그인 서비스 객체를 이용하겠다. 빨간줄 들어올텐데 갖다대고 클래스 만들어주자
+			sv.execute(request, response); //로그인 서비스가 일을 한 다음 브레이크 ㄱ
+			break;
+			
+			
+		case "myPage":
+			System.out.println("마이페이지로 이동 요청입니다!");
+			response.sendRedirect("user/user_mypage.jsp");
+			break;
+			
+			
+			
+		case "pwPage":
+			System.out.println("비밀번호 변경 페이지로 이동 요청!");
+			response.sendRedirect("user/user_change_pw.jsp");
+			break;
+			
+			
+		case "changePw":
+			System.out.println("비밀번호 변경 요청!");
+			sv = new ChangePwService();
 		}
 	}
 }

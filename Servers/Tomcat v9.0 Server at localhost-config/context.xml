@@ -28,7 +28,7 @@
     -->
     
     
-    <!-- 커넥션 풀 시작 -->
+    <!-- 마크업 언어의 커넥션 풀 시작 -->
     <Resource
     	auth="Container"
     	name="jdbc/myOracle"
@@ -54,9 +54,7 @@
     	maxTotal="10000"  커넥션객체를 최대 몇개인가 
 -->
     
-    
-    
-    
+	    
     
     
 </Context>

@@ -61,7 +61,7 @@
 					<li><a href="MyWeb">HOME</a></li> <%--MyWeb만 적어도 홈페이지로 갈 수 있다. WEB_INF에 lib의 web.xml에 적혀 있기 때문이다. --%>
 					<li><a href="">Member</a></li>
 					<li><a href="">BOARD</a></li>
-					<li><a href="">LOGIN</a></li>
+					<li><a href="/MyWeb/loginPage.user">LOGIN</a></li>
 					<li><a href="/MyWeb/joinPage.user" style="color: red">JOIN</a></li> <%--JSP가 JSP로 가는것은 MVC2패턴에 어긋남. 무조건 컨트롤러를 통해야함. 그래야 문제 발생 시 유지보수가 쉬움. 스프링도 그렇기 떄문에 작성법을 미리 익혀놓자 --%>
 				</ul>
 			</div>
