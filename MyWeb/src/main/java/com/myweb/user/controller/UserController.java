@@ -1,6 +1,7 @@
 package com.myweb.user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.myweb.user.service.ChangePwService;
+import com.myweb.user.service.DeleteService;
 import com.myweb.user.service.IUserService;
 import com.myweb.user.service.JoinService;
 import com.myweb.user.service.LoginService;
+import com.myweb.user.service.UpdateService;
 
 
 @WebServlet("*.user") //이건 맵핑한건데, 바꿀 수도 있다~ 바꾸는게 자유로움
@@ -104,6 +107,47 @@ public class UserController extends HttpServlet {
 		case "changePw":
 			System.out.println("비밀번호 변경 요청!");
 			sv = new ChangePwService();
+			sv.execute(request, response);
+			break;
+			
+		
+		case "modPage":
+			//정보변경쪽으로 이동시켜달라는 요청이되겠다.
+			System.out.println("회원 정보 변경 페이지로 이동 요청!");
+			response.sendRedirect("user/user_update.jsp");
+			break;
+			
+		
+		case "update":
+			System.out.println("회원 정보 수정 요청!"); //폼에서온것
+			sv = new UpdateService();
+			sv.execute(request, response);
+			
+			
+		case "delPage":
+			System.out.println("탈퇴 페이지로 이동 요청!");
+			response.sendRedirect("user/user_delete.jsp");
+			break;
+			
+		case "delete":
+			System.out.println("회원 탈퇴 요청이 들어옴!");
+			sv = new DeleteService();
+			sv.execute(request, response);
+			break;
+			
+		case "logout":
+			System.out.println("로그아웃 요청!");
+			request.getSession().invalidate(); //리퀘스트야 세션불러와서 다삭제해줘
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			
+			String htmlCode =  "<script>\r\n"
+                    + "alert('로그아웃 처리되었습니다');\r\n"
+                    + "location.href='/MyWeb';\r\n"
+                    + "</script>";
+			out.print(htmlCode);
+			out.flush();
+			break;
 		}
 	}
 }

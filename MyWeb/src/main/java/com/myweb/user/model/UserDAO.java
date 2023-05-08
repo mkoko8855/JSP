@@ -153,19 +153,42 @@ public class UserDAO {
 	
 	
 	
-	public UserVO changePassword(int pw) {
-		
-		
-		return null;
+	public void changePassword(String id, String newPw) { //셀렉만은 리턴이 있다. 나머진 없다.
+		String sql = "UPDATE my_user SET user_pw = ? WEHRE user_id = ?";
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate(); 
+	} catch (SQLException e) {
+	 	e.printStackTrace();
+	}
+}
+	
+	public void updateuser(UserVO vo) {
+		String sql = "UPDATE my_user SET user_name=?, user_email=?, user_address=? where user_id = ?";
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, vo.getUserName());
+			pstmt.setString(2, vo.getUserEmail());
+			pstmt.setString(3, vo.getUserAddress());
+			pstmt.setString(4, vo.getUserId());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	public void deleteUser(String id) {
+		String sql = "DELETE FROM my_user WHERE user_id = ?";
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
