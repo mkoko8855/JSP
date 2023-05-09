@@ -71,7 +71,8 @@
                         <div class="row">
                             <div class="col-md-offset-1 col-md-5">
                                 <p class="last-update">
-                                  ${content.regDate}
+                                  <fmt:parseDate value="${content.regDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
+                              	  <fmt:formatDate value="${parsedDateTime}" pattern="yy-MM-dd HH:mm" />
                                 </p>
                             </div>
                             <div class="btn-group col-md-offset-1 col-md-5">
@@ -79,7 +80,7 @@
                                 <c:choose>
                                        <c:when test="${user.userId == content.writer}">
                                         <a class="btn btn-primary" href="/MyWeb/modify.board?bId=${content.boardId}">수정하기</a>
-                                        <a class="btn btn-danger" href="#" onclick="return confirm('정말 삭제하시겠습니까?')">삭제하기</a>            
+                                        <a class="btn btn-danger" href="/MyWeb/delete.board?bId=${content.boardId}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제하기</a>            
                                        </c:when>
                                   	   <c:otherwise>
                                         <a class="btn btn-primary" href="/MyWeb/write.board">새 글 쓰기</a>

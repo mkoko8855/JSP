@@ -129,13 +129,63 @@ public class BoardDAO implements IBoardDAO {
 }
 				
 				
-				
-				
-				
-
-	
 	@Override
 	public void deleteBoard(int bId) {
-
+		String sql = "DELETE FROM my_board WHERE board_id=?";
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, bId);
+			pstmt.executeUpdate(); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	
+	
+	
+	@Override
+	public List<BoardVO> searchBoard(String keyword, String category) {
+		List<BoardVO> searchList = new ArrayList<>();
+		String sql = "SELECT * FROM my_board WHERE " + category + " LIKE ?";
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, "%" +keyword + "%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardVO vo = new BoardVO(
+						rs.getInt("board_id"),
+						rs.getString("writer"),
+						rs.getString("title"),
+						rs.getString("content"),
+						rs.getTimestamp("reg_date").toLocalDateTime(),
+						rs.getInt("hit")
+						);
+				//객체포장완료했으니 서치 리스트에 add해야지. 방금 생성한 vo를
+				searchList.add(vo); //이걸 조회할 데이터가 없을때까지 반복한다는 것이다!
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return searchList;
+	}
+	
+	
+	
+	@Override
+	public void upHit(int bId) {
+		String sql = "UPDATE my_board SET hit=hit+1 WHERE board_id=?";
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+					pstmt.setInt(1, bId);
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	}
+	
+	
+	
 }

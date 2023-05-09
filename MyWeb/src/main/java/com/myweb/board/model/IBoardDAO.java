@@ -44,6 +44,15 @@ public interface IBoardDAO { //BoardDAO만들기전에 여기서 인터페이스
 	
 	
 	
+	//글 검색 요청을 처리할 메서드 (추상메서드 추가)
+	List<BoardVO>searchBoard(String keyword, String category); 
+	
+	
+	
+	
+	
+	//조회수를 올려주는 메서드
+	void upHit(int bId); //매개값으로는 글번호를 알려주자
 	
 	
 }
