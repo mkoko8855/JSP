@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myweb.board.service.ContentService;
 import com.myweb.board.service.GetListService;
 import com.myweb.board.service.IBoardService;
+import com.myweb.board.service.ModifyService;
 import com.myweb.board.service.RegistService;
+import com.myweb.board.service.UpdateService;
 
 @WebServlet("*.board")   //컨트롤러는 서블릿클래스로 만듦(서블릿클래스만들떄 mapping과정을 사용하자~ *.board)
 public class BoardController extends HttpServlet {
@@ -19,7 +22,7 @@ public class BoardController extends HttpServlet {
        
 	
 	private IBoardService sv;
-	
+	private RequestDispatcher dp;
 	
 	
     public BoardController() {
@@ -70,32 +73,52 @@ public class BoardController extends HttpServlet {
 	case "list": //이게 바로 위 글이 말하는 재 요청 보내는 것이다. 이게 없으면 목록을 못본다.    (정제에 의해 MyWeb사라지고 board사라지고 list만 남음)
 		System.out.println("글 목록 요청이 들어옴!");
 		sv = new GetListService(); //클래스만들어야지~ 마우스갖다대서 만들자
-		sv.execute(request,  response); 
+		sv.execute(request, response); 
 		//이제 어느페이지에 응답을 할 건지 판단해야한다.
 		//세션이면 sendRedirect써도되지만, GetListService클래스에서 데이터를 리퀘스트에 담아서 전달했기 때문에, 세션이 아니기에 안된다.
 		//옮겨주는 객체를 하나 만들어줘야 한다. forward방식을 사용해서 request를 원하는 jsp파일로 전달해서
 		//그쪽에서 응답이 나갈 수 있도록 처리해야 한다.
 		//즉, request객체를 다음 화면까지 운반하기 위한 forward 기능을 제공하는 객체는
 		//RequestDispatcher 이다.
-		RequestDispatcher dp = request.getRequestDispatcher("board/board_list.jsp"); //경로설정완료
+		dp = request.getRequestDispatcher("board/board_list.jsp"); //경로설정완료
 		//이제 dp한테 명령내리자
 		dp.forward(request, response); //그럼 디스패쳐가 리퀘스트내장객체와 리스폰스내장객체를 가지고 응답안나가고 우리가 지정한 path로 간다. 그쪽으로 전달된다.
 		break; //꺼내는건 EL을 쓰자.  board_list.jsp의 tbody로가서 뿌려주자
 		
 		
+	case "content":
+		System.out.println("글 상세보기 요청이 들어옴!");
+		sv = new ContentService();
+		sv.execute(request, response);
+		//list에도 dp를 사용하고 content에서도 dp를 사용하니, 전체적으로 이클래스안에서만 하기 위해 private RequestDispatcher dp; 를 선언해서 쓰자 맨 위로가서 선언하자
+		dp = request.getRequestDispatcher("board/board_content.jsp"); //여기로가.
+		dp.forward(request, response);
+		break;
+	
 		
 		
-	
+	case "modify":
+		System.out.println("글 수정 페이지로 이동!");
+		sv = new ModifyService();
+		sv.execute(request, response);
+		dp = request.getRequestDispatcher("board/board_modify.jsp");
+		dp.forward(request,  response);
+		break;
+		
+		
+		
+	case "update":
+		System.out.println("글 수정 요청이 들어옴!");
+		sv = new UpdateService();
+		sv.execute(request, response);
+		response.sendRedirect("/MyWeb/content.board?bId=" + request.getParameter("bId")); //포워드말고 sendredirect를 썼다. 그렇다고 이 줄에서 끝나면 안된다. 글 번호가 몇번인지 확실하게 알려줘야 한다. bId값 안주면 null인데 얘가 parse.int를 인식해버린다. 
+		break;
+		
+		
+		
+		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	}
+  }
 
 }

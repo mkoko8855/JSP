@@ -18,7 +18,7 @@ public class GetListService implements IBoardService {
 		//입력을 통해 로직을 쓰는게 아니니 겟파라미터할거는 없다.
 		//바로부르자
 		BoardDAO dao = BoardDAO.getInstance();
-		List<BoardVO> boardList = dao.listBoard(); //글 목록을 boardList로 받자.
+		List<BoardVO> boardList = dao.listBoard(); //글 목록을 boardList로 받자. (BoardDAO의 public List<BoardVO> listBoard() { 메서드 내용을 받은 것이다)
 		
 		//dao.뒤의 listBoard(); 부터 완성해주자 f3눌러서 ㄱㄱ > 완성했다.
 		

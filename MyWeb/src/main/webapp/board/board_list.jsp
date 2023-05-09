@@ -57,10 +57,10 @@
 					<tr> <!-- 하나씩 b라는 변수로 전달해서 보드객체들을 꺼내자 -->
 						<td>${b.boardId}</td> <!-- td는 위에있는 th만큼. -->
 						<td>${b.writer}</td> 
-						<td>${b.title}</td> 
+						<td><a href="/MyWeb/content.board?bId=${b.boardId}">${b.title}</a></td>
 						<td>${b.regDate}</td> 
 						<td>${b.hit}</td> 
-						<!-- 이것들을 List의 개수만큼 반복할 것이다. -->
+						<!-- 이것들을 List의 개수만큼 반복할 것이다. 그래서 포이치문 사용. -->
 					</tr>
 				</c:forEach>
 			</tbody>

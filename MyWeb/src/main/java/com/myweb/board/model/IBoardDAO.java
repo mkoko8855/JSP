@@ -2,7 +2,7 @@ package com.myweb.board.model;
 
 import java.util.List;
 
-public interface IBoardDAO {
+public interface IBoardDAO { //BoardDAO만들기전에 여기서 인터페이스 클래스 작성하자
 
 	
 	//글 등록 메서드(모든 게시판 등록은 이 regist로 사용하게끔 박아놈)
