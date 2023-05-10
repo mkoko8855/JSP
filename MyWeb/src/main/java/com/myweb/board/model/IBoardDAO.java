@@ -2,6 +2,8 @@ package com.myweb.board.model;
 
 import java.util.List;
 
+import com.myweb.board.commons.PageVO;
+
 public interface IBoardDAO { //BoardDAO만들기전에 여기서 인터페이스 클래스 작성하자
 
 	
@@ -17,8 +19,10 @@ public interface IBoardDAO { //BoardDAO만들기전에 여기서 인터페이스
 	//등록했으면 글 전체 목록도 가지고 와야겠지
 	//글 전체 목록을 가지고 오는 메서드. SELECT * FROM my_board를 돌릴꺼다.
 	//리턴타입은 List로받아야겠지
-	List<BoardVO>listBoard();  //boardVO객체 하나가 하나의 글이니, 그 안에 번호,작성자,작성일,조회수 등등이 있다. 그게 여러개란 소리다.
+	//List<BoardVO>listBoard();  //boardVO객체 하나가 하나의 글이니, 그 안에 번호,작성자,작성일,조회수 등등이 있다. 그게 여러개란 소리다.    > 그러나 페이징 처리를 위해 주석처리...
 	
+	//페이징 처리 이후 지정된 범위의 글 목록을 가져오는 메서드
+	List<BoardVO>listBoard(PageVO paging);
 	
 	
 	
@@ -53,6 +57,18 @@ public interface IBoardDAO { //BoardDAO만들기전에 여기서 인터페이스
 	
 	//조회수를 올려주는 메서드
 	void upHit(int bId); //매개값으로는 글번호를 알려주자
+	
+	
+	
+	
+	
+	
+	
+	//총 게시물 수를 알려주는 (추상)메서드
+	int countArticles(); //매개값이뭔지 리턴은뭘로할지 SQL을 생각해보자
+	// SELECT COUNT(*) FROM my_board;
+	// 매개변수는 필요없다. 물음표 채우는게 없으니. 그럼 매개값은 없다.
+	// 리턴은 int로 받자. count가 인트니까
 	
 	
 }
